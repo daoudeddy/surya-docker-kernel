@@ -9,12 +9,12 @@ echo
 echo
 echo "Cloning Android Kernel Tools repo"
 echo
-#git clone --depth=1 https://github.com/pkm774/android-kernel-tools tools
+git clone --depth=1 https://github.com/pkm774/android-kernel-tools tools
 
 echo
 echo "Cloning Kernel Repo"
 echo
-#git clone https://github.com/freak07/Kirisakura_Bluecross.git -b Release_R_1 kernel
+git clone https://github.com/freak07/Kirisakura_Bluecross.git -b Release_R_1 kernel
 
 echo
 echo "Setting up env"
