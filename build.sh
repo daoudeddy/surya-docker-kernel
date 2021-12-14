@@ -4,7 +4,8 @@
 echo
 echo "Cloning mkdtimg repo"
 echo
-#git clone https://github.com/ZeruxVayu/MKDTIMG.git mkdtimg
+git clone https://github.com/ZeruxVayu/MKDTIMG.git mkdtimg
+chmod +x mkdtimg/mkdtimg
 
 echo
 echo "Cloning Android Kernel Tools repo"
