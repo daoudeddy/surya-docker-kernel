@@ -38,6 +38,12 @@ echo
 cd kernel
 
 echo
+echo "Patching File"
+echo
+
+sed -i 's/void set_vibrate()/void set_vibrate(void)/g' ./drivers/misc/cs40l2x.c
+
+echo
 echo "Clean Build Directory"
 echo 
 
