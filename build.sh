@@ -26,11 +26,11 @@ echo
 echo "Setting up env"
 echo
 
-PATH="../tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
-PATH="../tools/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
-PATH="../mkdtimg:$PATH"
-export PATH="../tools/clang/host/linux-x86/clang-r428724/bin:$PATH"
-export LD_LIBRARY_PATH="../clang/host/linux-x86/clang-r428724/lib64:$LD_LIBRARY_PATH"
+PATH="~/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
+PATH="~/tools/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
+PATH="~/mkdtimg:$PATH"
+export PATH="~/tools/clang/host/linux-x86/clang-r428724/bin:$PATH"
+export LD_LIBRARY_PATH="~/tools/clang/host/linux-x86/clang-r428724/lib64:$LD_LIBRARY_PATH"
 export ARCH=arm64
 export SUBARCH=ARM64
 export CLANG_TRIPLE=aarch64-linux-gnu-
@@ -41,7 +41,7 @@ echo
 echo "Clean Build Directory"
 echo 
 
-make clean && make mrproper
+# make clean && make mrproper
 
 echo
 echo "Issue Build Commands"
