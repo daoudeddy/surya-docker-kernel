@@ -20,6 +20,8 @@ echo
 echo "Setting up env"
 echo
 
+sudo apt install -y device-tree-compiler bc
+
 PATH="$PWD/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
 PATH="$PWD/tools/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
 PATH="$PWD/mkdtimg:$PATH"
