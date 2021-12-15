@@ -68,4 +68,4 @@ echo
 echo "Build The Good Stuff"
 echo 
 
-make CC=clang O=out -j4
+make CC=clang O=out CFLAGS="-fuse-ld=gold -Wl,--no-map-whole-files -Wl,--no-keep-memory -Wl,--no-keep-files-mapped" -j4
