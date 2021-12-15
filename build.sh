@@ -15,7 +15,7 @@ git clone --depth=1 https://github.com/pkm774/android-kernel-tools tools
 echo
 echo "Cloning Kernel Repo"
 echo
-git clone https://github.com/freak07/Kirisakura_Bluecross.git -b Release_R_1 kernel
+git clone https://github.com/flar2/Bluecross.git -b ElementalX-4.00 kernel
 
 echo
 echo "Setting up env"
@@ -62,10 +62,10 @@ echo
 echo "Set DEFCONFIG"
 echo 
 # make CC=clang O=out kirisakura_defconfig
-make CC=clang O=out b1c1_defconfig
+make CC=clang O=out elementalx_defconfig
 
 echo
 echo "Build The Good Stuff"
 echo 
 
-make CC=clang O=out LDFLAGS="-fuse-ld=gold --no-map-whole-files --no-keep-memory --no-keep-files-mapped" -j4
+make CC=clang O=out -j4
