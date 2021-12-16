@@ -15,7 +15,7 @@ git clone --depth=1 https://github.com/pkm774/android-kernel-tools tools
 echo
 echo "Cloning Kernel Repo"
 echo
-git clone https://github.com/flar2/Bluecross.git -b ElementalX-4.00 kernel
+git clone https://github.com/freak07/Kirisakura_Bluecross.git -b Release_3.1 kernel
 
 echo
 echo "Setting up env"
@@ -41,10 +41,10 @@ echo
 cd kernel
 
 echo
-echo "Patching File"
+echo "Patching Files"
 echo
 
-sed -i 's/void set_vibrate()/void set_vibrate(void)/g' ./drivers/misc/cs40l2x.c
+git apply ../kernel.patch
 
 echo
 echo "Clean Build Directory"
@@ -61,8 +61,7 @@ mkdir -p out
 echo
 echo "Set DEFCONFIG"
 echo 
-# make CC=clang O=out kirisakura_defconfig
-make CC=clang O=out elementalx_defconfig
+make CC=clang O=out b1c1_defconfig
 
 echo
 echo "Build The Good Stuff"
