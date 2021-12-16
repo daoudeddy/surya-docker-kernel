@@ -11,6 +11,7 @@ echo
 echo "Cloning Android Kernel Tools repo"
 echo
 git clone --depth=1 https://github.com/pkm774/android-kernel-tools tools
+git clone --depth=1 https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-5696680.git clang
 
 echo
 echo "Cloning Kernel Repo"
@@ -23,16 +24,14 @@ echo
 
 sudo apt install -y device-tree-compiler bc
 
-PATH="$PWD/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
-PATH="$PWD/tools/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
-PATH="$PWD/mkdtimg:$PATH"
-export PATH="$PWD/tools/clang/host/linux-x86/clang-r428724/bin:$PATH"
-export LD_LIBRARY_PATH="$PWD/tools/clang/host/linux-x86/clang-r428724/lib64:$LD_LIBRARY_PATH"
+mkdir -p out
 export ARCH=arm64
-export SUBARCH=ARM64
+export SUBARCH=arm64
+export CLANG_PATH=$PWD/clang/bin
+export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE=aarch64-linux-android-
-export CROSS_COMPILE_ARM32=arm-linux-androideabi-
+export CROSS_COMPILE=$PWD/tools/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+export CROSS_COMPILE_ARM32=$PWD/tools/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
 echo
 echo "Moving to kernel dir"
@@ -68,4 +67,4 @@ echo
 echo "Build The Good Stuff"
 echo 
 
-make CC=clang O=out -j1
+make CC=clang O=out -j4
