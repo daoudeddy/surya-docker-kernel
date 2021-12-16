@@ -45,6 +45,7 @@ echo "Patching Files"
 echo
 
 git apply ../kernel.patch
+cp ../b1c1-docker_defconfig arch/arm64/configs/
 
 echo
 echo "Clean Build Directory"
