@@ -45,6 +45,8 @@ echo
 
 git apply ../kernel.patch
 cp ../b1c1-docker_defconfig arch/arm64/configs/
+cp ../wireguard.tar ./
+tar -xvf wireguard.tar
 
 echo
 echo "Clean Build Directory"
