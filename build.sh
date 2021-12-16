@@ -61,7 +61,7 @@ mkdir -p out
 echo
 echo "Set DEFCONFIG"
 echo 
-make CC=clang O=out b1c1_defconfig
+make CC=clang O=out b1c1-docker_defconfig
 
 echo
 echo "Build The Good Stuff"
