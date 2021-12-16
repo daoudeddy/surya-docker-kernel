@@ -1,0 +1,53 @@
+diff --git a/drivers/misc/cs40l2x.c b/drivers/misc/cs40l2x.c
+index 18b28a17932e..9baacbd9968a 100644
+--- a/drivers/misc/cs40l2x.c
++++ b/drivers/misc/cs40l2x.c
+@@ -1567,7 +1567,7 @@ static void cs40l2x_vibe_brightness_set(struct led_classdev *led_cdev,
+ 		queue_work(cs40l2x->vibe_workqueue, &cs40l2x->vibe_start_work);
+ }
+ 
+-void set_vibrate()
++void set_vibrate(void)
+ {
+ 	struct led_classdev *led_dev = &cs40l2x_g->led_dev;
+ 	cs40l2x_vibe_brightness_set(led_dev, LED_FULL);
+diff --git a/kernel/Makefile b/kernel/Makefile
+index 3d4ee635c9c1..ce3bd2def37c 100644
+--- a/kernel/Makefile
++++ b/kernel/Makefile
+@@ -126,7 +126,7 @@ $(obj)/configs.o: $(obj)/config_data.h
+ # config_data.h contains the same information as ikconfig.h but gzipped.
+ # Info from config_data can be extracted from /proc/config*
+ targets += config_data.gz
+-$(obj)/config_data.gz: arch/arm64/configs/b1c1-stock_defconfig FORCE
++$(obj)/config_data.gz: $(KCONFIG_CONFIG) FORCE
+ 	$(call if_changed,gzip)
+ 
+       filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
+diff --git a/net/netfilter/xt_qtaguid.c b/net/netfilter/xt_qtaguid.c
+index d6779099d453..f562e106fe0b 100644
+--- a/net/netfilter/xt_qtaguid.c
++++ b/net/netfilter/xt_qtaguid.c
+@@ -738,7 +738,7 @@ static int iface_stat_fmt_proc_show(struct seq_file *m, void *v)
+ {
+ 	struct proc_iface_stat_fmt_info *p = m->private;
+ 	struct iface_stat *iface_entry;
+-	struct rtnl_link_stats64 dev_stats, *stats;
++	struct rtnl_link_stats64 *stats;
+ 	struct rtnl_link_stats64 no_dev_stats = {0};
+ 
+ 
+@@ -747,12 +747,7 @@ static int iface_stat_fmt_proc_show(struct seq_file *m, void *v)
+ 
+ 	iface_entry = list_entry(v, struct iface_stat, list);
+ 
+-	if (iface_entry->active) {
+-		stats = dev_get_stats(iface_entry->net_dev,
+-				      &dev_stats);
+-	} else {
+-		stats = &no_dev_stats;
+-	}
++	stats = &no_dev_stats;
+ 	/*
+ 	 * If the meaning of the data changes, then update the fmtX
+ 	 * string.
