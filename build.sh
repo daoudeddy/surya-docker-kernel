@@ -61,6 +61,7 @@ echo "Issue Build Commands"
 echo
 
 mkdir -p out
+df -h
 
 echo
 echo "Set DEFCONFIG"
