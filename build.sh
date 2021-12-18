@@ -16,7 +16,7 @@ git clone --depth=1 https://github.com/daoudeddy/gcc.git
 echo
 echo "Cloning Kernel Repo"
 echo
-git clone --depth=1 https://github.com/freak07/Kirisakura_Bluecross.git -b Release_3.1 kernel
+git clone --depth=1 https://github.com/AndroidGX/SimpleGX-P3-bluecross.git kernel
 
 echo
 echo "Setting up env"

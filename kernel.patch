@@ -1,18 +1,5 @@
-diff --git a/kernel/Makefile b/kernel/Makefile
-index 3d4ee635c..ce3bd2def 100644
---- a/kernel/Makefile
-+++ b/kernel/Makefile
-@@ -126,7 +126,7 @@ $(obj)/configs.o: $(obj)/config_data.h
- # config_data.h contains the same information as ikconfig.h but gzipped.
- # Info from config_data can be extracted from /proc/config*
- targets += config_data.gz
--$(obj)/config_data.gz: arch/arm64/configs/b1c1-stock_defconfig FORCE
-+$(obj)/config_data.gz: $(KCONFIG_CONFIG) FORCE
- 	$(call if_changed,gzip)
- 
-       filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
 diff --git a/net/netfilter/xt_qtaguid.c b/net/netfilter/xt_qtaguid.c
-index d6779099d..f562e106f 100644
+index 3dfa5a00..42f96eb0 100644
 --- a/net/netfilter/xt_qtaguid.c
 +++ b/net/netfilter/xt_qtaguid.c
 @@ -738,7 +738,7 @@ static int iface_stat_fmt_proc_show(struct seq_file *m, void *v)
@@ -38,8 +25,32 @@ index d6779099d..f562e106f 100644
  	/*
  	 * If the meaning of the data changes, then update the fmtX
  	 * string.
+diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
+index 790fbf6c..e4e0f6a8 100644
+--- a/scripts/dtc/dtc-lexer.l
++++ b/scripts/dtc/dtc-lexer.l
+@@ -38,7 +38,6 @@ LINECOMMENT	"//".*\n
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
+ extern bool treesource_error;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+diff --git a/scripts/dtc/dtc-lexer.lex.c_shipped b/scripts/dtc/dtc-lexer.lex.c_shipped
+index ba525c2f..750f7a4e 100644
+--- a/scripts/dtc/dtc-lexer.lex.c_shipped
++++ b/scripts/dtc/dtc-lexer.lex.c_shipped
+@@ -637,7 +637,6 @@ char *yytext;
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
+ extern bool treesource_error;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
 diff --git a/scripts/fetch-latest-wireguard.sh b/scripts/fetch-latest-wireguard.sh
-index 9730f2e6e..a9bf588e2 100755
+index 9730f2e6..a9bf588e 100755
 --- a/scripts/fetch-latest-wireguard.sh
 +++ b/scripts/fetch-latest-wireguard.sh
 @@ -1,28 +1 @@
