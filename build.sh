@@ -27,11 +27,11 @@ sudo apt install -y device-tree-compiler bc
 mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=$PWD/clang/bin
+export CLANG_PATH=$PWD/clang/clang-4691093/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE=$PWD/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
-export CROSS_COMPILE_ARM32=$PWD/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+export CROSS_COMPILE=$PWD/gcc/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+export CROSS_COMPILE_ARM32=$PWD/gcc/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
 echo
 echo "Moving to kernel dir"
