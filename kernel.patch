@@ -1,38 +1,5 @@
-diff --git a/arch/arm64/configs/b1c1_defconfig b/arch/arm64/configs/b1c1_defconfig
-index 92aeaa61dd74..286c67859550 100755
---- a/arch/arm64/configs/b1c1_defconfig
-+++ b/arch/arm64/configs/b1c1_defconfig
-@@ -2,6 +2,7 @@ CONFIG_LOCALVERSION="-Kirisakura-Bluecross-3.4.5"
- # CONFIG_LOCALVERSION_AUTO is not set
- CONFIG_KERNEL_LZ4=y
- # CONFIG_FHANDLE is not set
-+
- CONFIG_NO_HZ=y
- CONFIG_HIGH_RES_TIMERS=y
- CONFIG_IRQ_TIME_ACCOUNTING=y
-@@ -108,6 +109,7 @@ CONFIG_XFRM_INTERFACE=y
- CONFIG_XFRM_STATISTICS=y
- CONFIG_NET_KEY=y
- CONFIG_INET=y
-+CONFIG_WIREGUARD=n
- CONFIG_IP_MULTICAST=y
- CONFIG_IP_ADVANCED_ROUTER=y
- CONFIG_IP_MULTIPLE_TABLES=y
-diff --git a/drivers/misc/cs40l2x.c b/drivers/misc/cs40l2x.c
-index 18b28a17932e..9baacbd9968a 100644
---- a/drivers/misc/cs40l2x.c
-+++ b/drivers/misc/cs40l2x.c
-@@ -1567,7 +1567,7 @@ static void cs40l2x_vibe_brightness_set(struct led_classdev *led_cdev,
- 		queue_work(cs40l2x->vibe_workqueue, &cs40l2x->vibe_start_work);
- }
- 
--void set_vibrate()
-+void set_vibrate(void)
- {
- 	struct led_classdev *led_dev = &cs40l2x_g->led_dev;
- 	cs40l2x_vibe_brightness_set(led_dev, LED_FULL);
 diff --git a/kernel/Makefile b/kernel/Makefile
-index 3d4ee635c9c1..ce3bd2def37c 100644
+index 3d4ee635c..ce3bd2def 100644
 --- a/kernel/Makefile
 +++ b/kernel/Makefile
 @@ -126,7 +126,7 @@ $(obj)/configs.o: $(obj)/config_data.h
@@ -45,7 +12,7 @@ index 3d4ee635c9c1..ce3bd2def37c 100644
  
        filechk_ikconfiggz = (echo "static const char kernel_config_data[] __used = MAGIC_START"; cat $< | scripts/basic/bin2c; echo "MAGIC_END;")
 diff --git a/net/netfilter/xt_qtaguid.c b/net/netfilter/xt_qtaguid.c
-index d6779099d453..f562e106fe0b 100644
+index d6779099d..f562e106f 100644
 --- a/net/netfilter/xt_qtaguid.c
 +++ b/net/netfilter/xt_qtaguid.c
 @@ -738,7 +738,7 @@ static int iface_stat_fmt_proc_show(struct seq_file *m, void *v)
@@ -71,3 +38,36 @@ index d6779099d453..f562e106fe0b 100644
  	/*
  	 * If the meaning of the data changes, then update the fmtX
  	 * string.
+diff --git a/scripts/fetch-latest-wireguard.sh b/scripts/fetch-latest-wireguard.sh
+index 9730f2e6e..a9bf588e2 100755
+--- a/scripts/fetch-latest-wireguard.sh
++++ b/scripts/fetch-latest-wireguard.sh
+@@ -1,28 +1 @@
+ #!/bin/bash
+-set -e
+-USER_AGENT="WireGuard-AndroidROMBuild/0.2 ($(uname -a))"
+-
+-exec 9>.wireguard-fetch-lock
+-flock -n 9 || exit 0
+-
+-[[ $(( $(date +%s) - $(stat -c %Y "net/wireguard/.check" 2>/dev/null || echo 0) )) -gt 86400 ]] || exit 0
+-
+-while read -r distro package version _; do
+-	if [[ $distro == upstream && $package == kmodtools ]]; then
+-		VERSION="$version"
+-		break
+-	fi
+-done < <(curl -A "$USER_AGENT" -LSs --connect-timeout 30 https://build.wireguard.com/distros.txt)
+-
+-[[ -n $VERSION ]]
+-
+-if [[ -f net/wireguard/version.h && $(< net/wireguard/version.h) == *$VERSION* ]]; then
+-	touch net/wireguard/.check
+-	exit 0
+-fi
+-
+-rm -rf net/wireguard
+-mkdir -p net/wireguard
+-curl -A "$USER_AGENT" -LsS --connect-timeout 30 "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-$VERSION.tar.xz" | tar -C "net/wireguard" -xJf - --strip-components=2 "WireGuard-$VERSION/src"
+-sed -i 's/tristate/bool/;s/default m/default y/;' net/wireguard/Kconfig
+-touch net/wireguard/.check
