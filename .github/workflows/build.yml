@@ -27,6 +27,9 @@ jobs:
       - uses: pierotofy/set-swap-space@master
         with:
           swap-size-gb: 8
+          
+      - name: Check disk Space
+        run: df -h 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: sh ./build.sh
