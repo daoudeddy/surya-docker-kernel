@@ -24,9 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 8
+      #- uses: pierotofy/set-swap-space@master
+      #  with:
+      #    swap-size-gb: 4
           
       - name: Check disk Space
         run: df -h 
