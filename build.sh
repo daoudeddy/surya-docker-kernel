@@ -21,12 +21,12 @@ echo
 echo "Setting up env"
 echo
 
-sudo apt-get install dtc bc cpio ccache
+sudo apt-get install device-tree-compiler bc cpio ccache
 
 mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=$PWD/clang/bin
+export CLANG_PATH=~/clang/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
