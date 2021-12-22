@@ -21,14 +21,14 @@ sudo apt-get install device-tree-compiler bc cpio ccache
 mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=~/Kernel-Actions/clang/bin
+export CLANG_PATH=/home/runner/work/Kernel-Actions/Kernel-Actions/clang/bin
 PATH=/usr/lib/ccache:${PATH}
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
 export CROSS_COMPILE_ARM32=$CLANG_PATH/arm-linux-gnueabi-
 
-whereis clang
+clang -v
 
 echo $CLANG_PATH
 
