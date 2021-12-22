@@ -10,45 +10,33 @@ chmod +x mkdtimg/mkdtimg
 echo
 echo "Cloning Android Kernel Tools repo"
 echo
-git clone --depth=1 https://github.com/daoudeddy/clang.git
-git clone --depth=1 https://github.com/daoudeddy/gcc.git
+git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
 echo
 echo "Cloning Kernel Repo"
 echo
-git clone --depth=1 https://github.com/AndroidGX/SimpleGX-P3-bluecross.git kernel
+git clone --depth=1 https://github.com/LineageOS/android_kernel_xiaomi_surya.git kernel
 
 echo
 echo "Setting up env"
 echo
 
-sudo apt install -y device-tree-compiler bc
+brew install dtc bc
 
 mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=$PWD/clang/clang-4691093/bin
+export CLANG_PATH=$PWD/clang/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE=$PWD/gcc/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
-export CROSS_COMPILE_ARM32=$PWD/gcc/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+export CROSS_COMPILE=${CLANG_PATH}/bin/aarch64-linux-gnu-
+export CROSS_COMPILE_ARM32=${CLANG_PATH}/bin/arm-linux-gnueabi-
 
 echo
 echo "Moving to kernel dir"
 echo
 
 cd kernel
-
-echo
-echo "Patching Files"
-echo
-
-git apply ../kernel.patch
-
-cp ../b1c1-docker_defconfig arch/arm64/configs/
-cp ../wireguard.tar ./
-
-tar -xvf wireguard.tar
 
 echo
 echo "Clean Build Directory"
@@ -61,12 +49,11 @@ echo "Issue Build Commands"
 echo
 
 mkdir -p out
-df -h
 
 echo
 echo "Set DEFCONFIG"
 echo 
-make CC=clang O=out b1c1_defconfig
+make CC=clang O=out surya_defconfig
 
 echo
 echo "Build The Good Stuff"
