@@ -29,6 +29,6 @@ jobs:
         run: sh ./build.sh
       - uses: actions/upload-artifact@v2
         with:
-          name: termux-app-x86_64
+          name: Image.gz-dtb
           path: | 
             ./kernel/out/arch/arm64/boot/Image.gz-dtb
