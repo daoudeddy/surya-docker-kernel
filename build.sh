@@ -2,12 +2,6 @@
 
 # Clone Repo
 echo
-echo "Cloning mkdtimg repo"
-echo
-git clone https://github.com/ZeruxVayu/MKDTIMG.git mkdtimg
-chmod +x mkdtimg/mkdtimg
-
-echo
 echo "Cloning Android Kernel Tools repo"
 echo
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
@@ -26,7 +20,7 @@ sudo apt-get install device-tree-compiler bc cpio ccache
 mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
-export CLANG_PATH=~/clang/bin
+export CLANG_PATH=~/Kernel-Actions/clang/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
