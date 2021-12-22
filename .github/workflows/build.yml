@@ -24,9 +24,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 4
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: sh ./build.sh
