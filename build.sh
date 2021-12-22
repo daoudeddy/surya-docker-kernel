@@ -28,6 +28,8 @@ export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
 export CROSS_COMPILE_ARM32=$CLANG_PATH/arm-linux-gnueabi-
 
+whereis clang
+
 echo $CLANG_PATH
 
 echo
@@ -35,26 +37,27 @@ echo "Moving to kernel dir"
 echo
 
 cd kernel
+echo $PWD
 
 echo
 echo "Clean Build Directory"
 echo 
 
-make clean && make mrproper
+#make clean && make mrproper
 
 echo
 echo "Issue Build Commands"
 echo
 
-mkdir -p out
+#mkdir -p out
 
 echo
 echo "Set DEFCONFIG"
 echo 
-make CC=clang O=out surya_defconfig
+#make CC=clang O=out surya_defconfig
 
 echo
 echo "Build The Good Stuff"
 echo 
 
-make -j4 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
+#make -j4 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
