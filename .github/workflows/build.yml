@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,4 +31,4 @@ jobs:
         with:
           name: termux-app-x86_64
           path: | 
-            ./kernel/out/arch/arm64/boot/Image.gz
+            ./kernel/out/arch/arm64/boot/Image.gz-dtb
