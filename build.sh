@@ -21,7 +21,7 @@ echo
 echo "Setting up env"
 echo
 
-apt install dtc bc cpio
+sudo apt-get install dtc bc cpio ccache
 
 mkdir -p out
 export ARCH=arm64
@@ -59,4 +59,4 @@ echo
 echo "Build The Good Stuff"
 echo 
 
-make CC=clang O=out -j4
+make -j4 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
