@@ -29,8 +29,8 @@ export SUBARCH=arm64
 export CLANG_PATH=$PWD/clang/bin
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE=${CLANG_PATH}/bin/aarch64-linux-gnu-
-export CROSS_COMPILE_ARM32=${CLANG_PATH}/bin/arm-linux-gnueabi-
+export CROSS_COMPILE=${CLANG_PATH}/aarch64-linux-gnu-
+export CROSS_COMPILE_ARM32=${CLANG_PATH}/arm-linux-gnueabi-
 
 echo
 echo "Moving to kernel dir"
