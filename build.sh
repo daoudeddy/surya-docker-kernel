@@ -5,6 +5,7 @@ echo
 echo "Cloning Android Kernel Tools repo"
 echo
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
+ls ./clang
 
 echo
 echo "Cloning Kernel Repo"
@@ -21,6 +22,7 @@ mkdir -p out
 export ARCH=arm64
 export SUBARCH=arm64
 export CLANG_PATH=~/Kernel-Actions/clang/bin
+PATH=/usr/lib/ccache:${PATH}
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
