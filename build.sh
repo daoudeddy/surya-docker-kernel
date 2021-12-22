@@ -21,7 +21,7 @@ echo
 echo "Setting up env"
 echo
 
-brew install dtc bc cpio
+apt install dtc bc cpio
 
 mkdir -p out
 export ARCH=arm64
