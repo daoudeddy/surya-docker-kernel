@@ -31,4 +31,4 @@ jobs:
         with:
           name: termux-app-x86_64
           path: | 
-            ./kernel/out/arm64/boot/Image.gz
+            ./kernel/out/arch/arm64/boot/Image.gz
