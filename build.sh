@@ -5,7 +5,11 @@ echo
 echo "Cloning Android Kernel Tools repo"
 echo
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
-ls ./clang
+
+echo
+echo "AnyKernel3 Repo"
+echo
+git clone --depth=1 https://github.com/osm0sis/AnyKernel3.git
 
 echo
 echo "Cloning Kernel Repo"
@@ -16,9 +20,10 @@ echo
 echo "Setting up env"
 echo
 
-sudo apt-get install device-tree-compiler bc cpio ccache
+sudo apt-get install device-tree-compiler bc cpio ccache zip
 
 mkdir -p out
+export ZIPNAME=Surya-Kernel.zip
 export ARCH=arm64
 export SUBARCH=arm64
 export CLANG_PATH=/home/runner/work/Kernel-Actions/Kernel-Actions/clang/bin
@@ -59,3 +64,16 @@ echo "Build The Good Stuff"
 echo 
 
 make -j8 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
+
+cd ..
+
+cp kernel/out/arch/arm64/boot/Image.gz-dtb ./AnyKernel3
+
+cp anykernel.patch ./AnyKernel3
+
+cd AnyKernel3
+
+git apply anykernel.patch
+rm anykernel.patch
+
+zip "../$ZIPNAME" * -x '*.git*' README.md *placeholder
