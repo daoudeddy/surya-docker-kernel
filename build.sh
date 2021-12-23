@@ -28,13 +28,11 @@ export CLANG_TRIPLE=aarch64-linux-gnu-
 export CROSS_COMPILE=$CLANG_PATH/aarch64-linux-gnu-
 export CROSS_COMPILE_ARM32=$CLANG_PATH/arm-linux-gnueabi-
 
-clang -v
-
-echo $CLANG_PATH
-
 echo
 echo "Moving to kernel dir"
 echo
+
+cp surya-docker_defconfig kernel/arch/arm64/configs/
 
 cd kernel
 echo $PWD
@@ -54,10 +52,10 @@ mkdir -p out
 echo
 echo "Set DEFCONFIG"
 echo 
-make CC=clang O=out surya_defconfig
+make CC=clang O=out surya-docker_defconfig
 
 echo
 echo "Build The Good Stuff"
 echo 
 
-make -j4 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
+make -j8 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip Image.gz-dtb
