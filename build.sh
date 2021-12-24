@@ -67,6 +67,8 @@ make -j8 O=out CC="ccache clang" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJD
 
 cd ..
 
+ls kernel/out/arch/arm64/boot/
+
 cp kernel/out/arch/arm64/boot/Image.gz-dtb ./AnyKernel3
 
 cp anykernel.patch ./AnyKernel3
