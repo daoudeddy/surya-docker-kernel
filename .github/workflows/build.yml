@@ -29,6 +29,27 @@ jobs:
         run: sh ./build.sh
       - uses: actions/upload-artifact@v2
         with:
-          name: Surya-Kernel.zip
+          name: Image.gz-dtb
           path: | 
-            ./Surya-Kernel.zip
+            ./kernel/out/arch/arm64/boot/Image.gz-dtb
+            
+      - name: Create Github Pre-Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.rel_number.outputs.version }}
+          release_name: ${{ steps.rel_number.outputs.version }}
+          draft: false
+          prerelease: true
+
+      - name: Upload Kernel DTB Image
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./kernel/out/arch/arm64/boot/Image.gz-dtb
+          asset_name: Image-${{steps.rel_number.outputs.version}}.gz-dtb
+          asset_content_type: application/zip
