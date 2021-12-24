@@ -1,2 +1,2 @@
 # Kernel-Actions
-Build Pixel 3 XL kernel with Github Actions
+Build Poco X3 nfc kernel with Github Actions
