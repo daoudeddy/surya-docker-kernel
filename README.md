@@ -1,6 +1,6 @@
 # Kernel-Actions [![CI](https://github.com/daoudeddy/Kernel-Actions/actions/workflows/build.yml/badge.svg)]() 
 
-Build Poco X3 nfc kernel with Github Actions, this Kernel is based on Android 11 LineageOS 18.1 [source code](https://github.com/LineageOS/android_kernel_xiaomi_surya)
+Build Poco X3 nfc kernel with Github Actions, this Kernel is based on Android 13 LineageOS 20 [source code](https://github.com/LineageOS/android_kernel_xiaomi_surya)
 
 ## Adding docker support on Android Kernel
 You can find the Kernel Image in the [release](https://github.com/daoudeddy/Kernel-Actions/releases) tab
