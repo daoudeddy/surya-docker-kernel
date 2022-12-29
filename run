@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/sh
+sudo mount -t tmpfs -o mode=755 tmpfs /sys/fs/cgroup
+sudo mkdir -p /sys/fs/cgroup/devices
+sudo mount -t cgroup -o devices cgroup /sys/fs/cgroup/devices
+sleep 2
+exec sudo dockerd 2>&1
