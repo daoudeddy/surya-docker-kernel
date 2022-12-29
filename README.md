@@ -45,18 +45,21 @@ and then restart termux so that the service-daemon is started.
 
 Create dockerd service:
 
-`mkdir -p $PREFIX/var/service/dockerd/log`
-
-`ln -sf $PREFIX/share/termux-services/svlogger $PREFIX/var/service/dockerd/log/run`
-
-`wget https://raw.githubusercontent.com/daoudeddy/surya-docker-kernel/main/run -O $PREFIX/var/service/dockerd/run`
-
-`chmod +x $PREFIX/var/service/dockerd/run`
+```bash
+mkdir -p $PREFIX/var/service/dockerd/log
+ln -sf $PREFIX/share/termux-services/svlogger $PREFIX/var/service/dockerd/log/run
+wget https://raw.githubusercontent.com/daoudeddy/surya-docker-kernel/main/run -O $PREFIX/var/service/dockerd/run
+chmod +x $PREFIX/var/service/dockerd/run
+```
 
 Run dockerd service
-`sv up dockerd`
+```bash 
+sv up dockerd
+```
 
 Stop dockerd servive
-`sv down dockerd $$ sudo pkill dockerd`
+```bash
+sv down dockerd $$ sudo pkill dockerd
+```
 
 ## More info [original post](https://gist.github.com/FreddieOliveira/efe850df7ff3951cb62d74bd770dce27)
